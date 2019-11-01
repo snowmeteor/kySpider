@@ -1,7 +1,7 @@
 # kySpider
 网页结构化知识爬取
 
-列表页爬取示例
+##列表页爬取示例
 ```
 // 列表页URL
 		String url = "http://www.mingyihui.net/0_19_doctors.html";
@@ -34,7 +34,7 @@
 //		}
 ```
 
-详情页爬取示例
+##详情页爬取示例
 ```
 // 详情页URL
 		String url = "http://www.mingyihui.net/doctor_22786.html";
