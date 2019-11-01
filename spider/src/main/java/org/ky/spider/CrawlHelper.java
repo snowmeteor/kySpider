@@ -54,6 +54,7 @@ public class CrawlHelper {
 			HtmlCleaner hCleaner = new HtmlCleaner();
 			TagNode tNode = hCleaner.clean(html);
 			Document dom = new DomSerializer(new CleanerProperties()).createDOM(tNode);
+			
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			Object result = xPath.evaluate(xpath, dom, XPathConstants.NODESET);
 			if (result instanceof NodeList) {
@@ -95,8 +96,8 @@ public class CrawlHelper {
 	 * @param regexExp
 	 * @return
 	 */
-	public static String regex(String text, String regexExp) {
-		List<String> valueList = regexList(text, regexExp);
+	public static String fetchTextByRegex(String text, String regexExp) {
+		List<String> valueList = fetchListByRegex(text, regexExp);
 		return CollectionUtils.isEmpty(valueList) ? "" : valueList.get(0);
 	}
 
@@ -107,7 +108,7 @@ public class CrawlHelper {
 	 * @param regexExp
 	 * @return 匹配的字符串列表
 	 */
-	public static List<String> regexList(String text, String regexExp) {
+	public static List<String> fetchListByRegex(String text, String regexExp) {
 		List<String> valueList = new ArrayList<>();
 		if (StringUtils.isBlank(regexExp)) {
 			valueList.add(text);
@@ -160,7 +161,7 @@ public class CrawlHelper {
 		}
 
 		double t2 = System.currentTimeMillis();
-		System.out.println(url + " 静态获取网页时间：" + (t2 - t1) / 1000.0 + "s");
+		System.out.println(url + " 动态获取网页时间：" + (t2 - t1) / 1000.0 + "s");
 		return html;
 	}
 
@@ -179,8 +180,17 @@ public class CrawlHelper {
 			e.printStackTrace();
 		}
 		double t2 = System.currentTimeMillis();
-		System.out.println(url + " 动态获取网页时间：" + (t2 - t1) / 1000.0 + "s");
+		System.out.println(url + " 静态获取网页时间：" + (t2 - t1) / 1000.0 + "s");
 		return html;
 	}
 
+	/**
+	 * 获取网页标题
+	 * 
+	 * @param html
+	 * @return
+	 */
+	public static String getHtmlTitle(String html) {
+		return Jsoup.parse(html).select("title").text();
+	}
 }

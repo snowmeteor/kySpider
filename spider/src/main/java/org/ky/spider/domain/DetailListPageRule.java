@@ -9,11 +9,11 @@ package org.ky.spider.domain;
 public class DetailListPageRule {
 
 	private String listPageUrl;// 列表页起始url
-	private String detailPageXpath;// 详情页对应的xpath规则
-	private String detailPageRegexExp;// 详情页对应的正则
+	private String detailPageXpath;// 详情页对应的xpath规则，必须有
+	private String detailPageRegexExp;// 详情页对应的正则，可以没有
 
-	private String nextPageXpath;// 下一页对应的xpath规则
-	private String nextPageRegexExp;// 下一页对应的正则
+	private String nextPageXpath;// 下一页对应的xpath规则，必须有
+	private String nextPageRegexExp;// 下一页对应的正则，可以没有
 
 	public String getListPageUrl() {
 		return listPageUrl;
