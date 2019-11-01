@@ -3,7 +3,7 @@
 
 ## 列表页爬取示例
 ```
-// 列表页URL
+	        // 列表页URL
 		String url = "http://www.mingyihui.net/0_19_doctors.html";
 
 		// 设置列表页爬取规则
@@ -36,7 +36,7 @@
 
 ## 详情页爬取示例
 ```
-// 详情页URL
+                // 详情页URL
 		String url = "http://www.mingyihui.net/doctor_22786.html";
 
 		// 设置详情页爬取规则
