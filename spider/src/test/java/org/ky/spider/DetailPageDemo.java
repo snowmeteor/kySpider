@@ -38,7 +38,8 @@ public class DetailPageDemo {
 		rule.setId("医生");
 		rule.setXpath("//div[@class='doctorName']/h1/text()");
 		rules.add(rule);
-
+		
+		
 		// 爬取详情页根据规则转化为结构化知识
 		System.out.println(DetailPageSpider.crawl(url, rules, false));
 

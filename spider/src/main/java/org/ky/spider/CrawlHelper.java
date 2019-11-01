@@ -37,6 +37,85 @@ import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
  */
 public class CrawlHelper {
 
+	private static final String HTTP = "http://";
+	private static final String HTTPS = "https://";
+	private static final String FTP = "ftp://";
+
+	/**
+	 * 根据参照URL将目标URL补充成完整的以http或https开头的URL路径
+	 * 
+	 * @param referUrl  用于参考包含域名的URL，如：http://iranshao.com/bundled_races?page=1
+	 * @param targetUrl 待转换的路径，如：/bundled_races?date=2018&amp;page=13
+	 * @return 补充完的完整路径，如：http://iranshao.com/bundled_races?date=2018&amp;page=13
+	 */
+	public static String buildAbsoluteUrl(String referUrl, String targetUrl) {
+		if (StringUtils.startsWith(targetUrl, "//")) {
+			if (StringUtils.startsWith(referUrl, HTTP)) {
+				return "http:" + targetUrl;
+			}
+			if (StringUtils.startsWith(referUrl, HTTPS)) {
+				return "https:" + targetUrl;
+			}
+		}
+		if (StringUtils.startsWith(targetUrl, HTTP) || StringUtils.startsWith(targetUrl, HTTPS)
+				|| StringUtils.startsWith(targetUrl, FTP)) {
+			return targetUrl;
+		}
+		if (!StringUtils.startsWith(referUrl, HTTP) && !StringUtils.startsWith(referUrl, HTTPS)) {
+			return targetUrl;
+		}
+		if (StringUtils.isEmpty(targetUrl)) {
+			return referUrl;
+		}
+
+		targetUrl = removeEscapeString(targetUrl);
+		String domainRegexp = "http[s]?://[a-zA-Z\\.0-9]+/";
+		String domainName = fetchTextByRegex(referUrl, domainRegexp);
+		if (StringUtils.isBlank(domainName)) {
+			domainRegexp = referUrl;
+		}
+
+		String relativeRegexp = "[^\\?]*/";
+		String relativePath = fetchTextByRegex(referUrl, relativeRegexp);
+
+		String slash = "/";
+		if (relativePath.endsWith(".html")) {
+			relativePath = relativePath.substring(0, relativePath.lastIndexOf(slash));
+		}
+		if (StringUtils.startsWith(targetUrl, slash)) {
+			return domainName + targetUrl.substring(1);
+		}
+		return StringUtils.endsWith(relativePath, slash) ? relativePath + targetUrl : relativePath + slash + targetUrl;
+	}
+
+	/**
+	 * 去除HTML转义符
+	 * 
+	 * @param text
+	 * @return
+	 */
+	public static String removeEscapeString(String text) {
+		return text.replace("&amp;", "&");
+	}
+
+	/**
+	 * 根据参照URL，从网站相对路径构建网站绝对路径
+	 * 
+	 * @param referUrl      包含完整网站访问路径的参照URL
+	 * @param targetUrlList 相对路径列表
+	 * @return
+	 */
+	public static List<String> buildAbsoluteUrlList(String referUrl, List<String> targetUrlList) {
+		if (CollectionUtils.isEmpty(targetUrlList)) {
+			return targetUrlList;
+		}
+		List<String> urlList = new ArrayList<>();
+		for (String targetUrl : targetUrlList) {
+			urlList.add(buildAbsoluteUrl(referUrl, targetUrl));
+		}
+		return urlList;
+	}
+
 	/**
 	 * 根据xpath从html中获取指定的文本串
 	 * 
@@ -54,7 +133,7 @@ public class CrawlHelper {
 			HtmlCleaner hCleaner = new HtmlCleaner();
 			TagNode tNode = hCleaner.clean(html);
 			Document dom = new DomSerializer(new CleanerProperties()).createDOM(tNode);
-			
+
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			Object result = xPath.evaluate(xpath, dom, XPathConstants.NODESET);
 			if (result instanceof NodeList) {
