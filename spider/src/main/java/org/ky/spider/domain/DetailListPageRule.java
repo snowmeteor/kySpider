@@ -6,7 +6,7 @@ package org.ky.spider.domain;
  * @author snowmeteor
  *
  */
-public class DetailListPageRule {
+public class DetailListPageRule { 
 
 	private String listPageUrl;// 列表页起始url
 	private String detailPageXpath;// 详情页对应的xpath规则，必须有

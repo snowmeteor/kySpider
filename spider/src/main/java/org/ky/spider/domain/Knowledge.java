@@ -3,7 +3,7 @@ package org.ky.spider.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Knowledge {
+public class Knowledge { 
 
 	private String title;
 	private String url;

@@ -19,7 +19,7 @@ public class DetailPageDemo {
 
 		// 设置详情页爬取规则
 		List<DetailPageRule> rules = new ArrayList<>();
-		DetailPageRule rule = new DetailPageRule();
+		DetailPageRule rule = new DetailPageRule(); 
 		rule.setId("标签");
 		rule.setXpath(DetailPageRule.CONSTANT_EXP_PREFIX + "医生");
 

@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
  * @author snowmeteor
  *
  */
-public class CrawlHelper {
+public class CrawlHelper { 
 
 	private static final String HTTP = "http://";
 	private static final String HTTPS = "https://";

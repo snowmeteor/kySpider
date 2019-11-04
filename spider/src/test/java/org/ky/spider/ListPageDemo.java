@@ -15,7 +15,7 @@ public class ListPageDemo {
 	public static void main(String[] args) throws Exception {
 
 		// 列表页URL
-		String url = "http://www.mingyihui.net/0_19_doctors.html";
+		String url = "http://www.mingyihui.net/0_19_doctors.html"; 
 
 		// 设置列表页爬取规则
 		DetailListPageRule dlRule = new DetailListPageRule();

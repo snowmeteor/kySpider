@@ -73,7 +73,7 @@ public class DetailPageListSpider {
 		List<String> detailUrls = CrawlHelper.fetchTextList(html, xpath);
 		if (CollectionUtils.isEmpty(detailUrls)) {
 			return null;
-		}
+		} 
 
 		// 去重
 		Set<String> urlSets = new HashSet<>();

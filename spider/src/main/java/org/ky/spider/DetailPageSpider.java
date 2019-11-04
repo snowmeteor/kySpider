@@ -17,7 +17,7 @@ import org.ky.spider.domain.KnowledgeAttribute;
 public class DetailPageSpider {
 
 	/**
-	 * 网页详情页结构化知识处理
+	 * 网页详情页结构化知识处理 
 	 * @param url
 	 * @param rules
 	 * @param isDynamicPage
