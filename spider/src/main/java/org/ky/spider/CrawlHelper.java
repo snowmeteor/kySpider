@@ -223,7 +223,7 @@ public class CrawlHelper {
 
 		try (final WebClient webClient = new WebClient(BrowserVersion.CHROME)) {
 			webClient.getOptions().setJavaScriptEnabled(true);
-			webClient.getOptions().setCssEnabled(false);
+			webClient.getOptions().setCssEnabled(true);
 			webClient.getOptions().setThrowExceptionOnScriptError(false);
 			webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 			webClient.getOptions().setTimeout(40 * 1000);
