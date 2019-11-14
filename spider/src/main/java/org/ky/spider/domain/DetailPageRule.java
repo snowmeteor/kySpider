@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author snowmeteor
  *
  */
-public class DetailPageRule { 
+public class DetailPageRule {
 
 	/**
 	 * 常量表达式前缀，当xpath字符串以常量表达式开头时，爬取结果为去除常量表达式剩余的部分
@@ -16,9 +16,9 @@ public class DetailPageRule {
 	public static final String CONSTANT_EXP_PREFIX = "###";
 
 	private String id;
-	private String xpath;//必须有
-	private String regexExp;//可以没有
-	
+	private String xpath;// 必须有
+	private String regexExp;// 可以没有
+
 	public boolean isConstantExp() {
 		if (StringUtils.isNoneBlank(xpath) && xpath.startsWith(CONSTANT_EXP_PREFIX)) {
 			return true;
@@ -46,7 +46,7 @@ public class DetailPageRule {
 	}
 
 	public void setXpath(String xpath) {
-		this.xpath = xpath;
+		this.xpath = StringUtils.trim(xpath);
 	}
 
 	public String getRegexExp() {
@@ -54,7 +54,7 @@ public class DetailPageRule {
 	}
 
 	public void setRegexExp(String regexExp) {
-		this.regexExp = regexExp;
+		this.regexExp = StringUtils.trim(regexExp);
 	}
 
 	@Override

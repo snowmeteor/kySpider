@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
  * @author snowmeteor
  *
  */
-public class CrawlHelper { 
+public class CrawlHelper {
 
 	private static final String HTTP = "http://";
 	private static final String HTTPS = "https://";
@@ -164,6 +164,16 @@ public class CrawlHelper {
 	 * @return
 	 */
 	public static String fetchText(String html, String xpath) {
+
+		String text = "";
+		if (StringUtils.contains(xpath, "|")) {
+			String[] xpathArray = xpath.split("\\|");
+			for (String path : xpathArray) {
+				List<String> valueList = fetchTextList(html, path);
+				text += CollectionUtils.isEmpty(valueList) ? "" : valueList.get(0);
+			}
+			return text;
+		}
 		List<String> valueList = fetchTextList(html, xpath);
 		return CollectionUtils.isEmpty(valueList) ? "" : valueList.get(0);
 	}

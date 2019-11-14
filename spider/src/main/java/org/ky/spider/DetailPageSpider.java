@@ -9,7 +9,7 @@ import org.ky.spider.domain.Knowledge;
 import org.ky.spider.domain.KnowledgeAttribute;
 
 /**
-  * 网页详情页结构化处理
+ * 网页详情页结构化处理
  * 
  * @author snowmeteor
  *
@@ -17,7 +17,8 @@ import org.ky.spider.domain.KnowledgeAttribute;
 public class DetailPageSpider {
 
 	/**
-	 * 网页详情页结构化知识处理 
+	 * 网页详情页结构化知识处理
+	 * 
 	 * @param url
 	 * @param rules
 	 * @param isDynamicPage
@@ -41,7 +42,25 @@ public class DetailPageSpider {
 			KnowledgeAttribute attribute = new KnowledgeAttribute();
 			attribute.setId(rule.getId());
 			if (rule.isConstantExp()) {
-				attribute.setValue(rule.getConstantValue());
+				// 支持常量+规则获取值
+				if (rule.getXpath().contains("|")) {
+					String[] xpathArray = rule.getXpath().split("\\|");
+					String value = StringUtils
+							.trim(xpathArray[0].substring(DetailPageRule.CONSTANT_EXP_PREFIX.length()));
+
+					String xpath = "";
+					for (int i = 1; i < xpathArray.length; i++) {
+						if (StringUtils.isBlank(xpath)) {
+							xpath = xpathArray[i];
+						} else {
+							xpath += "|" + xpathArray[i];
+						}
+					}
+					value += CrawlHelper.fetchText(html, xpath);
+					attribute.setValue(value);
+				} else {
+					attribute.setValue(rule.getConstantValue());
+				}
 				knowledge.getAttributes().add(attribute);
 				continue;
 			}

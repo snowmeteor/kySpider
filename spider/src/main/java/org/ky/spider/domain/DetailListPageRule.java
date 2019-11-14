@@ -1,12 +1,14 @@
 package org.ky.spider.domain;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * 网页列表-详情页类型爬取规则
  * 
  * @author snowmeteor
  *
  */
-public class DetailListPageRule { 
+public class DetailListPageRule {
 
 	private String listPageUrl;// 列表页起始url
 	private String detailPageXpath;// 详情页对应的xpath规则，必须有
@@ -20,7 +22,7 @@ public class DetailListPageRule {
 	}
 
 	public void setListPageUrl(String listPageUrl) {
-		this.listPageUrl = listPageUrl;
+		this.listPageUrl = StringUtils.trim(listPageUrl);
 	}
 
 	public String getDetailPageXpath() {
@@ -28,7 +30,7 @@ public class DetailListPageRule {
 	}
 
 	public void setDetailPageXpath(String detailPageXpath) {
-		this.detailPageXpath = detailPageXpath;
+		this.detailPageXpath = StringUtils.trim(detailPageXpath);
 	}
 
 	public String getDetailPageRegexExp() {
@@ -36,7 +38,7 @@ public class DetailListPageRule {
 	}
 
 	public void setDetailPageRegexExp(String detailPageRegexExp) {
-		this.detailPageRegexExp = detailPageRegexExp;
+		this.detailPageRegexExp = StringUtils.trim(detailPageRegexExp);
 	}
 
 	public String getNextPageXpath() {
@@ -44,7 +46,7 @@ public class DetailListPageRule {
 	}
 
 	public void setNextPageXpath(String nextPageXpath) {
-		this.nextPageXpath = nextPageXpath;
+		this.nextPageXpath = StringUtils.trim(nextPageXpath);
 	}
 
 	public String getNextPageRegexExp() {
@@ -52,7 +54,7 @@ public class DetailListPageRule {
 	}
 
 	public void setNextPageRegexExp(String nextPageRegexExp) {
-		this.nextPageRegexExp = nextPageRegexExp;
+		this.nextPageRegexExp = StringUtils.trim(nextPageRegexExp);
 	}
 
 	@Override

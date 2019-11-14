@@ -36,7 +36,7 @@ public class DetailPageDemo {
 		
 		rule = new DetailPageRule();
 		rule.setId("医生");
-		rule.setXpath("//div[@class='doctorName']/h1/text()");
+		rule.setXpath(DetailPageRule.CONSTANT_EXP_PREFIX + "Doctor" + "| //div[@class='doctorName']/h1/text() ");
 		rules.add(rule);
 		
 		
